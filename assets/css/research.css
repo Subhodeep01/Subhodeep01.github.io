@@ -1,0 +1,116 @@
+/* =========================================================
+   Research page — additions to style.css
+   Loaded only by research.html.
+   ---------------------------------------------------------
+   1. Page hero
+   2. Project list
+   3. Responsive
+   ========================================================= */
+
+
+/* ---------- 1. Page hero ---------- */
+.page-banner { margin: 0; }
+
+.page-banner .pattern {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1920 / 420;
+}
+
+
+/* ---------- 2. Project list ----------
+   Each project is a row on the same 4-column grid the header
+   and footer use: meta in column 1, prose in 2–3, links in 4.
+   ------------------------------------------------------- */
+.project-list { display: flex; flex-direction: column; }
+
+.project {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--col-gap);
+  align-items: start;
+  border-top: 1px solid var(--rule);
+  padding-top: var(--rule-pad);
+  padding-bottom: clamp(38px, 4.6vw, 78px);
+}
+
+.project:last-child { padding-bottom: 0; }
+
+/* column 1 — index + status */
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.7vw, 11px);
+}
+
+.project-num {
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 0.95vw, 14.5px);
+  color: var(--ink);
+}
+
+.project-status {
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 0.9vw, 13.5px);
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink-muted);
+  max-width: 34ch; /* keeps the longest status on one line */
+}
+
+/* column 2–3 — title + abstract */
+.project-body { grid-column: 2 / 4; }
+
+.project-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(21px, 2.05vw, 34px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--ink-soft);
+  margin-bottom: clamp(14px, 1.5vw, 22px);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.project-body p {
+  font-size: clamp(13.5px, 1.16vw, 16px);
+  max-width: 76ch;
+}
+
+/* column 4 — links */
+.project-links {
+  grid-column: 4 / 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, 0.9vw, 13px);
+}
+
+/* trailing call-to-action under the list */
+.list-cta { padding-top: clamp(30px, 4vw, 62px); }
+
+
+/* ---------- 3. Responsive ---------- */
+@media (max-width: 860px) {
+  .project {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(14px, 3vw, 22px);
+  }
+
+  .project-meta {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .project-status { max-width: none; }
+
+  .project-body,
+  .project-links { grid-column: 1 / -1; }
+
+  .project-links { flex-direction: row; flex-wrap: wrap; gap: 18px; }
+
+  .page-banner .pattern { aspect-ratio: 16 / 9; }
+}

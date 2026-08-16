@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research — Subhodeep Ghosh</title>
+<meta name="description" content="Ongoing research in algorithmic fairness, agentic AI systems, and responsible data management.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&family=Wix+Madefor+Text:wght@400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/research.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header">
+  <div class="shell header-inner">
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="research.html" class="is-active" aria-current="page">Research</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="hero" id="top">
+    <div class="shell">
+
+      <div class="hero-title rule-top reveal">
+        <h1 class="display">Research</h1>
+        <p class="hero-tagline">Active threads in fairness, agentic systems, and responsible data</p>
+      </div>
+
+      <figure class="page-banner rule-top reveal" data-delay="100">
+        <canvas class="pattern" width="1920" height="420"
+                data-bg="#F1EBDD" data-fg="#C0693F" data-set="mixed"
+                data-seed="4.6" data-cell="26" data-focus="0.62,0.78" data-spread="0.9" data-stretch="2.6"
+                aria-hidden="true"></canvas>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ========== INTRO ========== -->
+  <section class="section section--about">
+    <div class="shell">
+
+      <div class="section-head rule-top reveal">
+        <h2 class="heading">Work in Progress</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="rule-top reveal">
+          <p class="lede">
+            Eight active projects spanning algorithmic fairness, agentic AI systems, and
+            responsible data management. Several are under review; the remainder are ongoing
+            in the Big Data Analytics Lab at NJIT.
+          </p>
+        </div>
+        <div class="rule-top reveal" data-delay="120">
+          <a class="arrow-link" href="index.html#publications">View Published Work</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== PROJECT LIST ========== -->
+  <section class="section section--projects" id="projects">
+    <div class="shell">
+
+      <div class="project-list">
+
+        <!-- 01 -->
+        <article class="project reveal" id="reordering-stream">
+          <div class="project-meta">
+            <span class="project-num">01</span>
+            <span class="project-status">Under review &bull; KDD 2027</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Reordering Stream Output for Group Fairness</h3>
+            <p>
+              Our block-level fairness framework allows for in-depth fairness enforcement in
+              windows, thus increasing the effectiveness of reordering for larger windows. We
+              propose optimal, efficient reordering algorithms that, upon detecting a fairness
+              violation, will rearrange elements in the current window to maximize the number of
+              fair blocks while maintaining the semantics of the stream.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://arxiv.org/abs/2601.08976" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+              Pre-print
+            </a>
+            <a class="icon-link" href="https://github.com/Subhodeep01/Streaming-p-Fairness" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18 3 12l6-6"/><path d="m15 6 6 6-6 6"/></svg>
+              GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="project reveal">
+          <div class="project-meta">
+            <span class="project-num">02</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Maximizing Submodular Functions Constrained to Multiple Fairness Attributes</h3>
+            <p>
+              We work towards building a set of candidates that not only satisfy the upper and
+              approximate lower bounds of fairness but also maximize the output of a monotone
+              submodular function, by using bipartite exchange graphs.
+            </p>
+          </div>
+          <div class="project-links"></div>
+        </article>
+
+        <!-- 03 -->
+        <article class="project reveal" id="lid-feature-selection">
+          <div class="project-meta">
+            <span class="project-num">03</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Local Intrinsic Dimensionality for Feature Selection</h3>
+            <p>
+              We use Local Intrinsic Dimensionality to score how much each feature locally
+              contributes to the joint complexity of the data, and use this to select or prune
+              features by comparing each feature's marginal LID against the joint LID. Features
+              that add little to the joint LID relative to their own marginal LID are treated as
+              locally redundant and dropped.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://github.com/Subhodeep01/DimProj" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18 3 12l6-6"/><path d="m15 6 6 6-6 6"/></svg>
+              GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="project reveal">
+          <div class="project-meta">
+            <span class="project-num">04</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">LLM-Powered Best Set Recommendation</h3>
+            <p>
+              A general computational framework that supports arbitrary, user-defined set-based
+              scoring functions over multi-modal data. We introduce a principled probabilistic
+              model to estimate the likelihood of correctly identifying the top-k set given user
+              preferences, and develop efficient algorithms to guide this selection process.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://arxiv.org/abs/2502.12998" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+              Pre-print
+            </a>
+            <a class="icon-link" href="https://github.com/sohrabnamazinia/Personalized-Top-K-Set-Queries" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18 3 12l6-6"/><path d="m15 6 6 6-6 6"/></svg>
+              GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="project reveal" id="fusion-knowledge">
+          <div class="project-meta">
+            <span class="project-num">05</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Large-Scale Fusion Knowledge Management with Agentic AI</h3>
+            <p>
+              Large-scale fusion experiments create huge and tightly correlated datasets, but
+              maintaining plasma shot logbooks remains a manual task — a bottleneck for scaling
+              and provenance. We propose an agent-based AI system for managing fusion knowledge
+              at the Princeton Plasma Physics Laboratory, providing scalable provenance logging
+              in a vector search database.
+            </p>
+          </div>
+          <div class="project-links"></div>
+        </article>
+
+        <!-- 06 -->
+        <article class="project reveal">
+          <div class="project-meta">
+            <span class="project-num">06</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Rethinking Fairness in LLM Embeddings</h3>
+            <p>
+              Fair2Vec creates unbiased gender representations by incorporating the classification
+              network within the Skip-gram training process — bias mitigation that cannot be
+              achieved through post-training processes alone. We are also analyzing the inner
+              workings of embedding spaces in large language models to neutralize socially
+              entrenched biases.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://github.com/Subhodeep01/AdvFair2Vec" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18 3 12l6-6"/><path d="m15 6 6 6-6 6"/></svg>
+              GitHub
+            </a>
+          </div>
+        </article>
+
+        <!-- 07 -->
+        <article class="project reveal">
+          <div class="project-meta">
+            <span class="project-num">07</span>
+            <span class="project-status">Ongoing</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Robust and Non-Robust Features in Adversarial Scenarios</h3>
+            <p>
+              We study the adversarial robustness of gradient-based and tree-based models when
+              trained on a spectrum of increasingly perturbed datasets that only retain robust and
+              non-robust features. The findings shed light on how a model perceives an input, and
+              we are looking at ways to incorporate them to create more robust models.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://docs.google.com/presentation/d/1ikEmN8xiRmOGySt5YNZEEm6_vj6d1Q245bmSxfOd8zk/edit?usp=sharing" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M9 20h6"/></svg>
+              Initial Findings
+            </a>
+          </div>
+        </article>
+
+        <!-- 08 -->
+        <article class="project reveal">
+          <div class="project-meta">
+            <span class="project-num">08</span>
+            <span class="project-status">Accepted &bull; ACM CHI BiAlign 2026</span>
+          </div>
+          <div class="project-body">
+            <h3 class="project-title">Rationalize: Shared Semantic Reasoning for Human-AI Alignment</h3>
+            <p>
+              We conceptualize human-AI interaction as a series of complementary role pairs
+              operating in a shared reasoning space. We relate these role pairs to the
+              bidirectional human-AI alignment framework, illustrating how aligning AI to humans
+              and aligning humans to AI differ by role, and sketch a collaborative research agenda
+              for alignment design and assessment.
+            </p>
+          </div>
+          <div class="project-links">
+            <a class="icon-link" href="https://arxiv.org/abs/2605.30632" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+              Pre-print
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="list-cta reveal">
+        <div class="rule-top">
+          <a class="arrow-link" href="index.html#publications">View All Publications</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section section--contact" id="contact">
+    <div class="shell">
+
+      <div class="section-head rule-top reveal">
+        <h2 class="heading">Let's Collaborate</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="rule-top reveal">
+          <p class="lede">
+            I am always open to research collaborations, speaking<br>
+            invitations, and conversations about responsible AI.
+          </p>
+        </div>
+        <div class="rule-top reveal" data-delay="120">
+          <a class="arrow-link" href="mailto:ghoshdeep01@gmail.com">Get in Touch</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="shell">
+
+    <div class="footer-brand rule-top">
+      <span class="footer-wordmark">Subhodeep Ghosh</span>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-cell rule-top"><span class="label">Connect</span></div>
+      <div class="footer-cell rule-top">
+        <address>Big Data Analytics Lab, GITC<br>NJIT, Newark, NJ 07102</address>
+      </div>
+      <div class="footer-cell rule-top">
+        <a href="tel:+12012832094">+1 201-283-2094</a><br>
+        <a href="mailto:ghoshdeep01@gmail.com">ghoshdeep01@gmail.com</a>
+      </div>
+      <div class="footer-cell rule-top">
+        <a href="https://www.linkedin.com/in/subhodeep-ghosh-461b14257/" target="_blank" rel="noopener">LinkedIn</a><br>
+        <a href="https://github.com/Subhodeep01" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="footer-row">
+      <div class="footer-cell rule-top"><span class="label">Navigation</span></div>
+      <div class="footer-cell rule-top">
+        <a href="index.html">Home</a><br>
+        <a href="index.html#publications">Publications</a><br>
+        <a href="research.html" class="is-active">Research</a><br>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <!-- kept empty so the copyright stays in column 4 -->
+      <div class="footer-cell rule-top"></div>
+      <div class="footer-cell rule-top">
+        <p class="footer-legal">&copy; 2026 by Subhodeep Ghosh.</p>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
