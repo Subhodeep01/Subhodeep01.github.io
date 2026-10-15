@@ -1,0 +1,83 @@
+Lemma 1 (Problem 2): computing P exactly
+Setting
+V: the elements, with n = |V|. G: the groups. Each element e carries g₁(e), g₂(e) ∈ G; if they are equal, e is a self-loop.
+Bounds: integers 0 ≤ ℓv ≤ u_v for each group v, given in binary. Weights: a real w_e for each element, with w(S) = Σ{e∈S} w_e.
+a_{v,e} = [g₁(e) = v] + [g₂(e) = v] ∈ {0, 1, 2} is the number of slots e has at v. Here [·] is 1 if the statement holds and 0 otherwise.
+deg_S(v) = Σ{e∈S} a{v,e}, and d(v) = deg_V(v).
+Fair: ℓ_v ≤ deg_S(v) ≤ u_v for every v. N is the maximum size of a fair set.
+Multigraph vocabulary. Every edge has two ends, and both ends of a loop sit at the same vertex. deg_F(x) is the number of ends of edges of F at x, so a loop counts 2. Given a requirement f, an f-factor is an edge set F with deg_F(x) = f(x) for every x. In a graph with no loops or parallel edges, a matching is a set of edges sharing no vertex; it is perfect if it covers every vertex exactly once.
+
+Lemma 1. A maximum-weight fair set among those of size N — and, for w = 0, a fair set of size N — can be computed with O(|G| + n³) arithmetic operations, independent of the magnitudes of ℓ and u. The same computation reports when no fair set exists.
+
+Two auxiliary facts
+
+Fact A (handshake). For every element e, Σv a{v,e} = 2: a non-loop contributes 1 at each of two groups, and a loop contributes 2 at one group. Therefore Σv deg_S(v) = Σ{e∈S} Σv a{v,e} = 2|S|, and in particular Σ_v d(v) = 2n.
+
+Fact B (size first, then weight). Let 𝒳 be a family of subsets of a finite set E, let c : E → ℝ, choose K > Σ_E |c|, and put c′ = K + c. For X, X′ ∈ 𝒳,
+
+c′(X) − c′(X′) = K(|X| − |X′|) + c(X) − c(X′), and c(X) − c(X′) ≥ −Σ_E |c|.
+
+So |X| > |X′| implies c′(X) > c′(X′), and |X| = |X′| implies c′(X) − c′(X′) = c(X) − c(X′). Hence every maximizer of c′ over 𝒳 has maximum cardinality, and among those it maximizes c. ∎
+
+Proof
+
+(a) Capping. Since a{v,e} ≥ 0 and S ⊆ V, we have deg_S(v) ≤ d(v). Let u′v = min(u_v, d(v)).
+
+If deg_S(v) ≤ u_v, then deg_S(v) ≤ u′v. Conversely, u′v ≤ u_v. So the fair sets are the same under u and u′.
+If u′v < ℓv, a fair S would give ℓv ≤ deg_S(v) ≤ u′v < ℓ_v, which is impossible: report infeasible.
+Otherwise 0 ≤ ℓv ≤ u′v ≤ d(v), and Σv (u′v − ℓv) ≤ Σv d(v) = 2n by Fact A.
+
+(b) Exact degrees. Build a multigraph H₁.
+
+Vertices: the groups; for each group v, a set D_v of u′v − ℓv dummies, with D = ⋃v D_v; and a spare vertex z, present exactly when Σv ℓ_v is odd.
+Edges: every element; a tether v–d for each d ∈ D_v; an edge between every two members of D; and, if z is present, an edge z–d for each d ∈ D.
+Requirement: f₁(v) = u′_v at each group; f₁(x) = 1 at each x ∈ D ∪ {z}.
+
+Claim. S ⊆ V is fair ⟺ some f₁-factor F of H₁ has F ∩ V = S.
+
+(⇐) The edges at a group v are elements, contributing deg_S(v) ends, and tethers. So u′v = deg_F(v) = deg_S(v) + k_v, where k_v is the number of tethers of v in F, and 0 ≤ k_v ≤ |D_v| = u′v − ℓv. Hence deg_S(v) ∈ [ℓv, u′_v], and S is fair by (a).
+(⇒) Put S into F. For each v, also add the tethers of k_v = u′v − deg_S(v) members of D_v; this is possible because fairness gives 0 ≤ k_v ≤ |D_v|. Every group now has degree u′v, and every chosen dummy has degree 1. Let L be the unchosen dummies. By Fact A,
+|L| = Σv (|D_v| − k_v) = Σv (deg_S(v) − ℓv) = 2|S| − Σv ℓ_v ≥ 0.
+If Σv ℓv is even, |L| is even, and L can be paired off by edges of D.
+If Σv ℓv is odd, |L| is odd, so |L| ≥ 1. The spare z takes one member of L, and the remaining |L| − 1 are paired.
+Every vertex now has its required degree. ∎
+
+(c) Perfect matching (Tutte 1954). Build a graph H₂ with no loops or parallel edges.
+
+Each x ∈ D ∪ {z} stays a single node. It has requirement 1, and no loop sits at it.
+Each group v becomes d₁(v) = d(v) + |D_v| external nodes, one per end at v; a self-loop contributes two. It also gets d₁(v) − u′v = d(v) − ℓv ≥ 0 internal nodes, with an edge between every internal and every external node of v.
+Each edge h of H₁ becomes a twin edge tw(h) joining the nodes of its two ends: the external node for an end at a group, and the node itself for an end at a dummy or at z.
+A self-loop therefore joins two distinct externals of its group, so H₂ has no loops. Each external node belongs to one end, and H₁ has at most one edge between any two members of D ∪ {z}, so H₂ has no parallel edges either.
+
+For a matching M, let Φ(M) = { h : tw(h) ∈ M }.
+
+Perfect M gives an f₁-factor. A node x ∈ D ∪ {z} lies only on twin edges of non-loop edges at x, and is covered exactly once, so deg{Φ(M)}(x) = 1. At a group v, the internal nodes are adjacent only to externals of v and are all covered, using d₁(v) − u′v distinct externals. The other u′v externals of v are matched by twin edges. An end at v counts toward deg{Φ(M)}(v) exactly when its external node is matched by a twin edge, and a loop’s twin edge covers two such nodes and counts 2. So deg{Φ(M)}(v) = u′v.
+Every f₁-factor F is Φ of some perfect M. The twin edges of F form a matching: an external node lies on only one twin edge, and a node of D ∪ {z} meets exactly deg_F = 1 edge of F. This matching leaves d₁(v) − u′_v externals of each group uncovered. Match them one-to-one to v’s internal nodes, which is possible because the internal–external edges form a complete bipartite graph. Filler edges are not twin edges, so Φ(M) = F.
+Weight. Give tw(e) the weight of element e and every other edge weight 0. Then w(M) = w(Φ(M) ∩ V). Φ is onto but not one-to-one, and that suffices. ∎
+
+(d) Algorithm and cost.
+
+Weight each element’s twin edge by c_e = K₁ + w_e, with K₁ > Σ_e |w_e|, and every other edge by 0.
+Compute a matching M* of maximum weight under K₂ + c, where K₂ > Σ|c|. This takes O(ν(μ + ν log ν)) time on a graph with ν nodes and μ edges (Edmonds 1965a,b; Gabow 1990).
+By Fact B applied to matchings, M* is perfect whenever a perfect matching exists, and then it maximizes c among perfect matchings.
+Correctness. By (b) and (c), the fair sets are exactly the sets Φ(M) ∩ V with M perfect, and weights are preserved. So S* = Φ(M) ∩ V is fair and maximizes Σ_{e∈S}(K₁ + w_e) over fair sets. By Fact B again, S has size N and maximizes w among the fair sets of size N; with w = 0 it is simply a fair set of size N. If M* is not perfect, no fair set exists.
+Size of H₂. |D| ≤ 2n, Σv d₁(v) = 2n + |D| ≤ 4n, and Σv (d(v) − ℓ_v) ≤ 2n. So
+ν ≤ (2n + 1) + 4n + 2n = 8n + 1 nodes;
+μ ≤ (n + |D| + |D|(|D| − 1)/2 + |D|) + Σv d₁(v)·Σv (d(v) − ℓ_v) ≤ (2n² + 4n) + 8n² edges.
+Time. O(|G| + n) to read the input and cap, O(n²) to build H₂, and O(n³) to match: O(|G| + n³) in total. The bounds enter only through comparisons and counts in (a), so the running time does not depend on their magnitudes. ∎
+Self-loops: where they enter and why nothing breaks
+Step	Effect of a self-loop at v	Why it is handled
+a, deg, d	counts 2 at v	two ends, both at v
+Fact A	Σv a{v,e} = 2 still	proved for both kinds of element
+(a)	none	uses only deg_S ≤ d
+(b), parity	its 2 enters	L	= 2	S	− Σℓ	Fact A
+(b), (⇐)	counted twice in deg_F(v)	ends counted through a_{v,e}
+(c), construction	becomes two distinct externals of v	H₂ has no loops
+(c), correspondence	its twin edge covers two externals and counts 2	shown in both directions
+single nodes	never carry a loop	only groups can have loops, and groups always get gadgets
+(d)	none	Edmonds’ and Gabow’s algorithms work on general graphs
+References
+W. T. Tutte. A short proof of the factor theorem for finite graphs. Canadian Journal of Mathematics 6 (1954), 347–352.
+J. Edmonds. Paths, trees, and flowers. Canadian Journal of Mathematics 17 (1965), 449–467.
+J. Edmonds. Maximum matching and a polyhedron with 0,1-vertices. Journal of Research of the National Bureau of Standards 69B (1965), 125–130.
+H. N. Gabow. Data structures for weighted matching and nearest common ancestors with linking. Proceedings of the 1st ACM–SIAM SODA (1990), 434–443.
