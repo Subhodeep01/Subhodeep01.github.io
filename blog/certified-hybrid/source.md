@@ -12,7 +12,7 @@ For \(0<\varepsilon\le 1/4\), the output is upper-fair, has total shortfall at m
 
 <div class="route"><span>Walk from a fair set</span><b>→</b><span>Check a certificate</span><b>→</b><span>Fall back if needed</span></div>
 
-## 00 · The objects we work with
+## I · The objects we work with
 
 There are \(n=|V|\) available elements. Each has two group **slots**, one at each endpoint of its edge. In Problem 1 the endpoints come from two separate attributes. In Problem 2 they come from the same pool of groups, so an element may be a self-loop. Both of a loop's slots count at its one group.
 
@@ -26,7 +26,7 @@ The value function \(f\) is normalized, monotone and submodular: \(f(\varnothing
 
 **The workhorse.** Given a fixed number \(w(e)\) for each element, we can exactly maximize \(\sum_{e\in S}w(e)\) over fair sets: by min-cost flow for Problem 1, or weighted matching for Problem 2. Our [companion article on matching](../fair-selection-matching/) shows how the shared-group reduction works and how to prioritize cardinality when computing \(P\). A certificate call, by contrast, maximizes its supplied weights over **all** fair sets.
 
-## 01 · The method at a glance
+## II · The method at a glance
 
 1. Build fair starting points and the greedy reference \(Y_0\).
 2. Walk toward \(Y_0\) while preserving fairness and increasing value. Keep the best result \(T_1\).
@@ -35,7 +35,7 @@ The value function \(f\) is normalized, monotone and submodular: \(f(\varnothing
 5. If no certificate passes, run the fallback local search.
 6. Optionally restore exact fairness and continue improving, subject to the acceptance checks below.
 
-## 02 · Build the starting sets
+## III · Build the starting sets
 
 **\(P\), a largest fair set.** Find a fair set of size \(N\), breaking ties by the sum of singleton values \(f(\{e\})\). Use the flow or matching route appropriate to the problem. Those singleton weights are a proxy; the algorithm does not need \(P\) to maximize the submodular objective. Its cardinality gives \(N\), which sets the fallback's shortfall budget.
 
@@ -45,7 +45,7 @@ The value function \(f\) is normalized, monotone and submodular: \(f(\varnothing
 
 **\(L\), an optional LP start.** For coverage and facility objectives, solve the linear programming relaxation, which gives fractional element values \(x_e\in[0,1]\). Find a maximum-weight fair set using those values as weights, breaking ties toward valuable elements, and polish it by the same rule. \(Q\) and \(L\) are both fair.
 
-## 03 · Walk along alternating trails
+## IV · Walk along alternating trails
 
 Take a current fair set \(T\) and a reference \(R\), initially \(Y_0\). Keep the shared elements in place. Color \(T\setminus R\) green (remove) and \(R\setminus T\) rust (add). At each group, pair as many opposite-color slots as possible, each slot at most once. Follow the pairings through the elements. The resulting trails alternate colors; they stop at unpaired slots or close into cycles.
 
@@ -65,7 +65,7 @@ A trail or contiguous piece gives a candidate move: remove its \(T\)-colored ele
 
 **Which move wins?** Among the candidates, keep only those respecting the upper bounds and preserving zero shortfall. Take the best value gain if it exceeds \(\gamma_H=\varepsilon M_{\rm all}/n\), where \(M_{\rm all}=\max_e f(\{e\})\). Then rebuild trails from the updated set. When no candidate qualifies, stop. If \(M_{\rm all}=0\), normalization and submodularity give no positive gain; otherwise \(f(T)\le nM_{\rm all}\) bounds the number of accepted moves by \(n^2/\varepsilon\). Run the walk from \(Q\) and, when available, \(L\). Keep the better result \(T_1\). It is fair and \(f(T_1)\ge f(Q)\); the next step checks its quality.
 
-## 04 · Certify the answer
+## V · Certify the answer
 
 **Lemma C1.** For any \(T\), even one that is not fair, the following upper bound is valid:
 
@@ -87,13 +87,13 @@ The maximum over fair sets is at least the expression for the fair set \(O\). Th
 
 **Tighten the bound.** Take the minimum of valid upper bounds: \(f(V)\) by monotonicity, the LP value when available, Lemma C1 applied at other base sets (a chain can start at \(T\) and grow to \(T\cup S^*\)), and a cut bound from multiple submodular upper inequalities. The cut solver can stop at a time budget; use its proven upper bound, not the value of the best feasible solution it found.
 
-## 05 · Use a failed certificate to guide another walk
+## VI · Use a failed certificate to guide another walk
 
 The maximizing fair set \(S^*\) points to elements with high total marginal weight at \(T\). Add it to the references and continue walking from the current fair set toward the reference sets. Recompute the certificate. The method uses a small round budget (three by default), returning as soon as the test passes.
 
 Accepted walk moves only increase value, but a newly computed bound need not decrease. Keeping \(U_{\min}\), the smallest valid bound found anywhere during the run, lets us reuse every improvement in the certificate.
 
-## 06 · Fall back to local search
+## VII · Fall back to local search
 
 **Theorem C.** For the hybrid's setting \(\delta=\varepsilon\), the fallback runs in \(n^{O(1/\varepsilon)}\) time and reaches an upper-fair set of shortfall at most \(\varepsilon N\) and value at least \((1/2-\varepsilon)\mathrm{OPT}\).
 
@@ -129,13 +129,13 @@ Rearranging and using the choice of \(q\) gives
 
 **Running time and the half factor.** The bound \(f(T)\le nM\) gives at most \(2qn^2/\varepsilon\) accepted moves, and each move search examines \(n^{O(q)}\) candidates. The half factor comes from comparing \((q-1)\) copies of the optimum's additions with \(q\) copies of the current set's losses. The project's lower bound shows that, for guarantees based on this kind of local optimum, move sizes of order \(1/\varepsilon\) are necessary in the worst case.
 
-## 07 · Restore and improve
+## VIII · Restore and improve
 
 **Restore exact fairness if needed.** Try shortfall-reducing walks and re-optimize between repairs. The implementation may use a fair projection if the repair search does not finish within its budget. Accept an exactly fair candidate \(F\) only if \(f(F)\ge(1/2-\varepsilon)U_{\min}\) and \(f(F)\ge f(T_1)\). If this check fails, keep the fallback result with its existing guarantee.
 
 **Optional improvement.** Use remaining time to seek value-increasing exchanges that respect the upper bounds and never increase shortfall. This preserves the guarantees already established.
 
-## 08 · Put the guarantees together
+## IX · Put the guarantees together
 
 | How the run finishes | Fairness guarantee | Value guarantee |
 |---|---|---|
